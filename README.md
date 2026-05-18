@@ -1,6 +1,7 @@
 # Luxe Cart MERN Ecommerce
 
 A full ecommerce website built with the MERN stack: React/Vite frontend, Express API, and MongoDB-ready product/order models.
+A full MERN stack ecommerce website with React storefront, Express API, MongoDB-ready models, cart, product filtering, and checkout UI.
 
 ## Run locally
 
