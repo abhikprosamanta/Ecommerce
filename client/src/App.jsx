@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import heroImage from "./assets/hero-shopping.png";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_URL = import.meta.env.VITE_API_URL || "";
 
 const fallbackProducts = [
   {
@@ -115,6 +115,11 @@ export default function App() {
   const [orderStatus, setOrderStatus] = useState("");
 
   useEffect(() => {
+    if (!API_URL) {
+      setProducts(fallbackProducts);
+      return;
+    }
+
     fetch(`${API_URL}/products`)
       .then((response) => response.json())
       .then((data) => setProducts(data.length ? data : fallbackProducts))
@@ -185,6 +190,14 @@ export default function App() {
       shipping,
       total
     };
+
+    if (!API_URL) {
+      setCart([]);
+      setOrderStatus("Demo checkout complete. Connect a live API later to save orders.");
+      event.currentTarget.reset();
+      setIsCheckingOut(false);
+      return;
+    }
 
     try {
       const response = await fetch(`${API_URL}/orders`, {
